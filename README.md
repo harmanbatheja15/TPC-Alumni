@@ -1,5 +1,6 @@
 <img width="2240" alt="tpc-alumni-1" src="https://github.com/harmanbatheja15/TPC-Alumni/assets/66913564/d8b7bf39-25cf-48f6-a8a9-3e8764c09396">
-<img width="2240" alt="tpc-alumni-2" src="https://github.com/harmanbatheja15/TPC-Alumni/assets/66913564/acb83e94-824e-4c3a-a459-b77fb4ebe66d">
+<img width="2240" alt="Screenshot 2023-05-23 at 9 09 35 PM" src="https://github.com/harmanbatheja15/TPC-Alumni/assets/66913564/d11a47fd-0afe-4c5b-b6fe-ff1738e2ce0d">
+
 
 
 # Thapar Polytechnic College - Alumni Association
