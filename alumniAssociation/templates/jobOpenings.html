@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %} Job Openings {% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div class="container alumniDirectory my-5">
+    <div class="row">
+
+        {% if jobOpenings %}
+        {% for jobs in jobOpenings %}
+        <div class="col-xs-12 col-sm-6 col-md-6 my-2">
+            <div class="card">
+                <!--Card content-->
+                <div class="card-body">
+
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="card-text">{{jobs.companyName}}</h5>
+                        <a href="/jobDetail/{{jobs.id}}/" class="btn btn-primary btn-sm">
+                            View
+                        </a>
+                    </div>
+
+                    <h3 class="card-title">{{jobs.jobTitle}}</h3>
+
+                    <h6><b>Location: </b>{{jobs.location}}</h6>
+
+                    <h6><b>Skills: </b>{{jobs.skills}}</h6>
+
+                    <div class="d-flex align-items-center bg-light p-3 rounded mt-3">
+                        <div class="">
+                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt=""
+                                style="width: 40px; border-radius: 50%;">
+                        </div>
+                        <div class="pl-2">
+                            <a href="/user/detail/{{jobs.user}}/"><b>{{jobs.user}}</b></a> <br>
+                            <span>Published on {{jobs.postedOn}}</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h1>No Job Openings</h1>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

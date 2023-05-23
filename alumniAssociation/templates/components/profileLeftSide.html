@@ -1,0 +1,123 @@
+<div class="col-lg-3 col-md-12 d-md-block">
+    <div class="card card-left">
+        <div class="card-body">
+            <div class="d-flex justify-content-end">
+                <a href="/editProfile/">Edit Profile</a>
+            </div>
+            {% if request.user.is_authenticated %}
+            <div class="d-flex justify-content-center pb-2">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                    alt="{{user.name}}" style="width: 100px; border-radius: 50%;">
+            </div>
+            <h4 class="text-center">{{user.name}}</h4>
+            <h6 class="text-center">{{user.role}}</h6>
+            {% for basicInfo in basicInformation %}
+            <h6 class="text-center">{{basicInfo.joiningYear}} - {{basicInfo.passingYear}}</h6>
+            <h6 class="text-center">Roll Number: {{basicInfo.rollNo}}</h6>
+            {% endfor %}
+            {% for facultyInfo in facultyInformation %}
+            <h6 class="text-center">{{facultyInfo.joinYear}} - {{facultyInfo.leftYear}}</h6>
+            {% endfor %}
+            {% if user.isAuthenticated %}
+            <div class="d-flex justify-content-center">
+                <i class="fa fa-check pr-1 text-success"></i>
+                <h6 class="text-center text-success">Authenticated User</h6>
+            </div>
+            {% else %}
+            <div class="d-flex justify-content-center">
+                <i class="fa fa-exclamation-triangle pr-1 text-danger"></i>
+                <h6 class="text-center text-danger">Unauthenticated User</h6>
+            </div>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <div class="card card-left">
+        <div class="card-body">
+            {% if request.user.is_authenticated %}
+            <h5 class="">Basic Information</h5>
+            <hr>
+            <div class="d-flex">
+                <i class="fa fa-envelope pr-1"></i>
+                <h6>{{user.email}}</h6>
+            </div>
+            <div class="d-flex">
+                <i class="fa fa-phone pr-1"></i>
+                <h6>+{{user.phone}}</h6>
+            </div>
+            <div class="d-flex">
+                <i class="fa fa-map-marker pr-1"></i>
+                <h6>{{user.location}}</h6>
+            </div>
+            <div class="d-flex">
+                <i class="fa fa-users pr-1"></i>
+                <h6>{{user.maritalStatus}}</h6>
+            </div>
+            <div class="d-flex">
+                <i class="fa fa-mars pr-1"></i>
+                <h6>{{user.gender}}</h6>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <div class="card card-left">
+        <div class="card-body">
+            {% if request.user.is_authenticated %}
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h5>Social Media</h5>
+                {% if socialAccounts %}
+                {% for socialAccount in socialAccounts %}
+                <a href="/editSocialMedia/{{socialAccount.id}}/">Edit</a>
+                {% endfor %}
+                {% else %}
+                <a href="/addSocialMedia/">Add</a>
+                {% endif %}
+            </div>
+
+            <hr>
+
+            {% for socialAccount in socialAccounts %}
+
+            {% if socialAccount.facebook %}
+            <div class="d-flex">
+                <i class="fa fa-facebook-square pr-1"></i>
+                <a href="https://facebook.com/{{socialAccount.facebook}}/" target="_blank" style="color: #000">
+                    <h6>{{socialAccount.facebook}}</h6>
+                </a>
+            </div>
+            {% endif %}
+            {% if socialAccount.instagram %}
+            <div class="d-flex">
+                <i class="fa fa-instagram pr-1"></i>
+                <a href="https://instagram.com/{{socialAccount.instagram}}/" target="_blank" style="color: #000">
+                    <h6>{{socialAccount.instagram}}</h6>
+                </a>
+            </div>
+            {% endif %}
+            {% if socialAccount.linkedin %}
+            <div class="d-flex">
+                <i class="fa fa-linkedin pr-1"></i>
+                <a href="https://linkedin.com/in/{{socialAccount.linkedin}}/" target="_blank" style="color: #000">
+                    <h6>{{socialAccount.linkedin}}</h6>
+                </a>
+            </div>
+            {% endif %}
+            {% if socialAccount.twitter %}
+            <div class="d-flex">
+                <i class="fa fa-twitter pr-1"></i>
+                <a href="https://twitter.com/{{socialAccount.twitter}}/" target="_blank" style="color: #000">
+                    <h6>{{socialAccount.twitter}}</h6>
+                </a>
+            </div>
+            {% endif %}
+
+            {% endfor %}
+
+            {% endif %}
+        </div>
+    </div>
+    <br>
+</div>

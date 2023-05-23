@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% block title %} Alumni Directory {% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div class="container alumniDirectory">
+    <div class="card-deck row">
+        
+        <!-- Search -->
+        <div class="col-lg-12 col-md-12 my-5">
+            <div class="card p-3">
+                <div class="card-body border-0">
+                    <div class="active" id="profile">
+
+                            <div class="faq-section">
+                                <div class="faq" id="accordion">
+                            
+                                    <div class="card cursor-pointer shadow">
+                                        <div class="card-header bg-white" id="faqHeading-1" role="button">
+                                            <div class="mb-0">
+                                                <h5 class="faq-title" data-toggle="collapse" data-target="#faqCollapse-1" data-aria-expanded="true" data-aria-controls="faqCollapse-1">
+                                                    Search by joining year
+                                                </h5>
+                                             </div>
+                                        </div>
+                                        <div id="faqCollapse-1" class="collapse" aria-labelledby="faqHeading-1" data-parent="#accordion">
+                                            <form method="GET">
+                                                <div class="card-body pb-1">
+                                                    <label for="joiningYear" class="p-0 m-0">Joining Year:</label>
+                                                </div>
+                                                <div class="d-flex col-lg-6 mb-3">
+                                                    <input type="number" name="joiningYear" class="form-control ml-1">
+                                                    <button class="btn btn-primary mx-3">Search</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                            
+                                    <div class="card cursor-pointer border-top-0 shadow">
+                                        <div class="card-header bg-white" id="faqHeading-2" role="button">
+                                            <div class="mb-0">
+                                                <h5 class="faq-title" data-toggle="collapse" data-target="#faqCollapse-2" data-aria-expanded="false" data-aria-controls="faqCollapse-2">
+                                                    Search by Name
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div id="faqCollapse-2" class="collapse" aria-labelledby="faqHeading-2" data-parent="#accordion">
+                                            <form method="GET">
+                                                <div class="card-body pb-1">
+                                                    <label for="name" class="p-0 m-0">Name:</label>
+                                                </div>
+                                                <div class="d-flex col-lg-6 mb-3">
+                                                    <input type="text" name="name" class="form-control ml-1">
+                                                    <button class="btn btn-primary mx-3">Search</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if alumnis or faculties or nameAlumnis or nameFaculties %}
+
+        {% for alumni in alumnis %}
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2 px-0">
+            <div class="card">
+                <!--Card image-->
+                <div class="view overlay">
+                    <img class="card-img-top"
+                        src="{% if alumni.photo %} {{alumni.photo}} {% else %} https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png {% endif %}"
+                        alt="{{alumni.name}}">
+                </div>
+                <!--Card content-->
+                <div class="card-body">
+                    <h4 class="card-title">{{alumni.user}}</h4>
+                    <span class="card-text">{{alumni.user.role}}, {{alumni.joiningYear}} - {{alumni.passingYear}}</span><br>
+                    <p class="card-text"><b>{{alumni.course}}</b>, {{alumni.branch}}</p>
+                    <a href="/user/detail/{{alumni.user.name}}/" class="btn btn-info btn-md">View Profile</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% for faculty in faculties %}
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2 px-0">
+            <div class="card">
+                <!--Card image-->
+                <div class="view overlay">
+                    <img class="card-img-top"
+                        src="{% if faculty.photo %} {{faculty.photo}} {% else %} https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png {% endif %}"
+                        alt="{{faculty.name}}">
+                </div>
+                <!--Card content-->
+                <div class="card-body">
+                    <h4 class="card-title">{{faculty.user}}</h4>
+                    <span class="card-text">{{faculty.user.role}}, {{faculty.joinYear}} - {{faculty.leftYear}}</span><br>
+                    <p class="card-text"><b>{{faculty.jobTitle}}</b>, {{faculty.Department}}</p>
+                    <a href="/user/detail/{{faculty.user.name}}/" class="btn btn-info btn-md">View Profile</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% for nAlumnis in nameAlumnis %}
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2 px-0">
+            <div class="card">
+                <!--Card image-->
+                <div class="view overlay">
+                    <img class="card-img-top"
+                        src="{% if nAlumnis.photo %} {{nAlumnis.photo}} {% else %} https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png {% endif %}"
+                        alt="{{nAlumnis.name}}">
+                </div>
+                <!--Card content-->
+                <div class="card-body">
+                    <h4 class="card-title">{{nAlumnis.user}}</h4>
+                    <span class="card-text">{{nAlumnis.user.role}}, {{nAlumnis.joiningYear}} - {{nAlumnis.passingYear}}</span><br>
+                    <p class="card-text"><b>{{nAlumnis.course}}</b>, {{nAlumnis.branch}}</p>
+                    <a href="/user/detail/{{nAlumnis.user.name}}/" class="btn btn-info btn-md">View Profile</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+        {% for nFaculties in nameFaculties %}
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2 px-0">
+            <div class="card">
+                <!--Card image-->
+                <div class="view overlay">
+                    <img class="card-img-top"
+                        src="{% if nFaculties.photo %} {{nFaculties.photo}} {% else %} https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png {% endif %}"
+                        alt="{{nFaculties.name}}">
+                </div>
+                <!--Card content-->
+                <div class="card-body">
+                    <h4 class="card-title">{{nFaculties.user}}</h4>
+                    <span class="card-text">{{nFaculties.user.role}}, {{nFaculties.joinYear}} - {{nFaculties.leftYear}}</span><br>
+                    <p class="card-text"><b>{{nFaculties.jobTitle}}</b>, {{nFaculties.Department}}</p>
+                    <a href="/user/detail/{{nFaculties.user.name}}/" class="btn btn-info btn-md">View Profile</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% else %}
+
+        {% for alumni in allAlumnis %}
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2 px-0">
+            <div class="card">
+                <!--Card image-->
+                <div class="view overlay">
+                    <img class="card-img-top"
+                        src="{% if alumni.photo %} {{alumni.photo}} {% else %} https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png {% endif %}"
+                        alt="{{alumni.name}}">
+                </div>
+
+                <!--Card content-->
+                {% if alumni.basicinformation_set.first or alumni.facultyinformation_set.first %}
+                <div class="card-body">
+                    <h4 class="card-title">{{alumni.name}}</h4>
+                    {% if alumni.basicinformation_set.first %}
+                    <span class="card-text">{{alumni.role}}, {{alumni.basicinformation_set.first.joiningYear}} - {{alumni.basicinformation_set.first.passingYear}}</span><br>
+                    {% else %}
+                    <span class="card-text">{{alumni.role}}, {{alumni.facultyinformation_set.first.joinYear}} - {{alumni.facultyinformation_set.first.leftYear}}</span><br>
+                    {% endif %}
+                    {% if alumni.basicinformation_set.first %}
+                    <p class="card-text"><b>{{alumni.basicinformation_set.first.course}}</b>, {{alumni.basicinformation_set.first.branch}}</p>
+                    {% else %}
+                    <p class="card-text"><b>{{alumni.facultyinformation_set.first.jobTitle}}</b>, {{alumni.facultyinformation_set.first.Department}}</p>
+                    {% endif %}
+
+                    <a href="/user/detail/{{alumni.name}}/" class="btn btn-info btn-md">View Profile</a>
+                </div>
+                {% else %}
+                <div class="card-body">
+                    <h4 class="card-title">{{alumni.name}}</h4>
+                    <span class="card-text">{{alumni.role}}</span><br>
+                    <p class="card-text">-------</p>
+                    <a href="/user/detail/{{alumni.name}}/" class="btn btn-info btn-md">View Profile</a>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+        {% endfor %}
+        
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="home">
+
+    <!-- Jumbotron -->
+    <div class="jumbotron jumbotron-fluid py-5 px-1 bg-dark text-white">
+        <div class="container">
+            <h1 class="display-5">Welcome to Thapar Alumni Association</h1>
+            <p class="lead">Connect with your fellow alumni, stay up-to-date with college news and events, and explore job opportunities.</p>
+            {% if request.user.is_authenticated %}
+            <span></span>
+            {% else %}
+            <a href="/signup/" class="btn btn-primary">Get started</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Alumni Directory</h4>
+                        <p class="card-text">Browse our alumni directory to find and connect with fellow graduates from your alma mater.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Job Openings</h4>
+                        <p class="card-text">Join Our Association and Unlock a World of Professional Growth. Apply Today for Open Positions. Explore job opportunities posted by fellow alumnis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Images -->
+    <div class="container mb-5">
+        <div class="card-group">
+            <div class="card m-1 rounded-lg">
+                <img class="card-img-top rounded-lg" src="http://tpc.ac.in/images/tpcgallery/image1.JPG" alt="Card image cap">
+            </div>
+            <div class="card m-1 rounded-lg">
+                <img class="card-img-top rounded-lg" src="http://tpc.ac.in/images/tpcgallery/image3.JPG" alt="Card image cap">
+            </div>
+            <div class="card m-1 rounded-lg">
+                <img class="card-img-top rounded-lg" src="http://tpc.ac.in/images/tpcgallery/image4.JPG" alt="Card image cap">
+            </div>
+            <div class="card m-1 rounded-lg">
+                <img class="card-img-top rounded-lg" src="http://tpc.ac.in/images/tpcgallery/image7.JPG" alt="Card image cap">
+            </div>
+        </div>
+        <div class="card-group">
+            <div class="card m-1 rounded-lg">
+                <img class="card-img-top rounded-lg" src="http://tpc.ac.in/images/tpcgallery/image8.JPG" alt="Card image cap">
+            </div>
+            <div class="card m-1 rounded-lg">
+                <img class="card-img-top rounded-lg" src="http://tpc.ac.in/images/tpcgallery/image10.JPG" alt="Card image cap">
+            </div>
+            <div class="card m-1 rounded-lg">
+                <img class="card-img-top rounded-lg" src="http://tpc.ac.in/images/tpcgallery/image11.JPG" alt="Card image cap">
+            </div>
+            <div class="card m-1 rounded-lg">
+                <img class="card-img-top rounded-lg" src="http://tpc.ac.in/images/tpcgallery/image12.JPG" alt="Card image cap">
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="jumbotron jumbotron-fluid bg-primary text-white py-5 px-1">
+        <div class="container">
+            <h2 class="display-5">Join the Alumni Network Today</h2>
+            <p class="lead">Register now to connect with your fellow alumni, stay informed, and unlock exclusive benefits.
+            </p>
+            {% if request.user.is_authenticated %}
+            <span></span>
+            {% else %}
+            <a href="/signup/" class="btn btn-light">Register Now</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="container my-5">
+        <div class="shadow-lg">
+            <div class="row">
+                
+                <div class="col-lg-5 bg-dark p-5 text-white">
+                    <h3 class="mb-5">Contact</h3>
+                    <div>
+                        <p class="mb-3 pl-4">
+                            <i class="fa fa-envelope pr-1"></i>
+                            principaltpc@thapar.edu
+                        </p>
+                        <p class="mb-3 pl-4">
+                            <i class="fa fa-phone pr-1"></i>
+                            +91 1752365554
+                        </p>
+                        <p class="mb-3 pl-4">
+                            <i class="fa fa-map-marker pr-1"></i>
+                            Thapar Polytechnic College
+                            <br> Bhadson Road, Adarsh Nagar,
+                            <br>Patiala
+                        </p>
+                    </div>
+                </div>
+    
+                <div class="col-lg-7 p-5">
+                    <form method="POST" onsubmit="return alert('Successfully Submitted')">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <div class="form-group">
+                                    <label for="name">Full Name</label>
+                                    <input type="text" required class="form-control" id="name" name="name">
+                                </div>
+                            </div>
+    
+                            <div class="col-sm-6 mb-3">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" required class="form-control" id="email" name="email">
+                                </div>
+                            </div>
+    
+                            <div class="col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="tel" required class="form-control" id="phone" name="phone">
+                                </div>
+                            </div>
+    
+                            <div class="col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea class="form-control" required id="message" name="message" rows="4"></textarea>
+                                </div>
+                            </div>
+    
+                            <div class="col-sm-12 mb-3">
+                                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                            </div>
+    
+                        </div>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="py-3 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy;
+                <script>document.write(new Date().getFullYear())</script>
+                Thapar Polytechnic College. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+</div>
+
+{% endblock %}

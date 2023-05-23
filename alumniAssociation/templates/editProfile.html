@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} Edit Profile {% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div class="signup container mt-5 bg-white">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row jumbotron p-1 bg-white">
+            <div class="col-sm-12 my-4">
+                <h2 class="text-center">Edit Profile</h2>
+            </div>
+
+            {% for field in u_form %}
+
+            <div class="col-sm-6 form-group mb-3">
+                <label class="p-0 m-0">{{field.label_tag}}</label>
+                {{field}}
+            </div>
+
+            {% for error in field.errors %}
+            <p style="color: red;">{{error}}</p>
+            {% endfor %}
+
+            {% endfor %}
+
+            <div class="col-sm-12 form-group mb-3">
+                <a href="/password_change/">Change Password</a>
+                <button class="btn btn-primary float-right">Next</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+{% endblock %}

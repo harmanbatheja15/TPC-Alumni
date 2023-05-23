@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% block title %} Profile {% endblock %}
+{% load static %}
+
+{% block content %}
+
+{% include 'addEducation.html' %}
+
+<div class="home container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-10 col-11 mx-auto">
+            <div class="row">
+                
+                <!-- Left side div -->
+                {% include 'components/profileLeftSide.html' %}
+                
+                <!-- Right side div -->
+                <div class="col-lg-9 col-md-12">
+                    <div class="card">
+                        <div class="card-body border-0">
+                            <div class="active" id="profile">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>About Me</h4>
+                                    {% if aboutDescription %}
+                                    {% for about in aboutMe %}
+                                    <a href="/editAboutMe/{{about.id}}/" class="btn btn-warning btn-sm">Edit</a>
+                                    {% endfor %}
+                                    {% else %}
+                                    <a href="/addAboutMe/" class="btn btn-primary btn-sm">Add</a>
+                                    {% endif %}
+                                </div>
+                                <hr>
+                                {% for about in aboutMe %}
+                                <div class="mb-4">
+                                    <p>{{about.description}}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-body border-0">
+                            <div class="active" id="profile">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>EDUCATION</h4>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                        data-target="#educationModal">Add Education</button>
+                                </div>
+                                <hr>
+                                {% for educationDetail in educationDetails %}
+                                <div class="mb-4 d-flex justify-content-between bg-light p-3">
+                                    <div>
+                                        <h5>{{educationDetail.instituteName}}</h5>
+                                        <span>{{educationDetail.degree}}</span><br>
+                                        <span>{{educationDetail.department}}</span><br>
+                                        <span>{{educationDetail.joinYear}} - {{educationDetail.passYear}}</span>
+                                    </div>
+                                    <div>
+                                        <a href="/editEducation/{{educationDetail.id}}/" type="submit"
+                                            class="btn btn-sm btn-warning">Edit</a>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <a href="/deleteEducation/{{educationDetail.id}}/" onclick="return confirm('Are you sure you want to delete this?')" type="submit" class="btn btn-sm btn-danger mt-1">Delete</a>
+                                        </form>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                
+                                {% if basicInformation %}
+                                {% for basicInfo in basicInformation %}
+                                <div class="mb-4 d-flex justify-content-between bg-light p-3">
+                                    <div>
+                                        <h5>Thapar Polytechnic College</h5>
+                                        <span>{{basicInfo.course}}</span><br>
+                                        <span>{{basicInfo.branch}}</span><br>
+                                        <span>{{basicInfo.joiningYear}} - {{basicInfo.passingYear}}</span>
+                                    </div>
+                                    <div>
+                                        <a href="/editBasicInformation/{{basicInfo.id}}/" type="submit" class="btn btn-sm btn-warning mr-3">Edit</a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-body border-0">
+                            <div class="active" id="profile">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>Work Experience</h4>
+                                    <a href="/addWorkExperience/" type="button" class="btn btn-primary btn-sm">Add work
+                                        experience</a>
+                                </div>
+                                <hr>
+                                {% for workExperience in workExperiences %}
+                                <div class="mb-4 d-flex justify-content-between bg-light p-3">
+                                    <div>
+                                        <h5>{{workExperience.workTitle}}</h5>
+                                        <span>{{workExperience.companyName}}</span><br>
+                                        <span>In {{workExperience.workIndustry}}</span><br>
+                                        <small class="text-muted">{{workExperience.achievements}}</small>
+                                    </div>
+                                    <div>
+                                        <a href="/editWorkExperience/{{workExperience.id}}/" type="submit"
+                                            class="btn btn-sm btn-warning">Edit</a>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <a href="/deleteWorkExperience/{{workExperience.id}}/" onclick="return confirm('Are you sure you want to delete this?')" type="submit" class="btn btn-sm btn-danger mt-1">Delete</a>
+                                        </form>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                                {% if facultyInformation %}
+                                {% for facultyInfo in facultyInformation %}
+                                <div class="mb-4 d-flex justify-content-between bg-light p-3">
+                                    <div>
+                                    <h5>Thapar Polytechnic College</h5>
+                                    <span>{{facultyInfo.jobTitle}}</span><br>
+                                    <span>{{facultyInfo.Department}} department</span><br>
+                                    <span>{{facultyInfo.joinYear}} - {{facultyInfo.leftYear}}</span>
+                                </div>
+                                    <div>
+                                        <a href="/editFacultyInformation/{{facultyInfo.id}}/" type="submit"
+                                            class="btn btn-sm btn-warning">Edit</a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    {% if jobOpenings %}
+                    <div class="card">
+                        <div class="card-body border-0">
+                            <div class="active" id="profile">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>My job postings</h4>
+                                    <a href="/addJobOpenings/" type="button" class="btn btn-primary btn-sm">Add job openings</a>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    {% for jobs in jobOpenings %}
+                                    <div class="col-xs-12 col-sm-12 col-md-6 my-2">
+                                        <div class="card">
+                                            <!--Card content-->
+                                            <div class="card-body">
+                                    
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="">
+                                                        <h5 class="card-text">{{jobs.companyName}}</h5>
+                                                        <h3 class="card-title">{{jobs.jobTitle}}</h3>
+                                                        <h6><b>Location: </b>{{jobs.location}}</h6>
+                                                        <h6><b>Skills: </b>{{jobs.skills}}</h6>
+                                                    </div>
+                                                    <div class="">
+                                                        <a href="/jobDetail/{{jobs.id}}/" class="btn btn-primary btn-sm">View</a>
+                                                        <form method="post">
+                                                            {% csrf_token %}
+                                                            <a href="/deleteJobOpening/{{jobs.id}}/" onclick="return confirm('Are you sure you want to delete this?')" type="submit" class="btn btn-sm btn-danger mt-1">Delete</a>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                    
+                                                <div class="d-flex align-items-center bg-light p-3 rounded mt-3">
+                                                    <div class="">
+                                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                                                            alt="" style="width: 40px; border-radius: 50%;">
+                                                    </div>
+                                                    <div class="pl-2">
+                                                        <a href="/user/detail/{{jobs.user}}/"><b>{{jobs.user}}</b></a> <br>
+                                                        <span>Published on {{jobs.postedOn}}</span>
+                                                    </div>
+                                                </div>
+                                    
+                                            </div>
+                                    
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

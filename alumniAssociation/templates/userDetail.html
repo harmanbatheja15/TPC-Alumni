@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% block title %} User Details {% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div class="home container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-10 col-11 mx-auto">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 d-md-block">
+                    <div class="card card-left">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-center pb-2">
+                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                                    alt="{{user.name}}" style="width: 100px; border-radius: 50%;">
+                            </div>
+                            <h4 class="text-center">{{user.name}}</h4>
+                            <h6 class="text-center">{{user.role}}</h6>
+                            {% for basicInfo in basicInformation %}
+                            <h6 class="text-center">{{basicInfo.joiningYear}} - {{basicInfo.passingYear}}</h6>
+                            <h6 class="text-center">Roll Number: {{basicInfo.rollNo}}</h6>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card card-left">
+                        <div class="card-body">
+                            <h5 class="">Basic Information</h5>
+                            <hr>
+                            <div class="d-flex">
+                                <i class="fa fa-envelope pr-1"></i>
+                                <h6>{{user.email}}</h6>
+                            </div>
+                            {% if user.phoneVisibility == "Public" %}
+                            <div class="d-flex">
+                                <i class="fa fa-phone pr-1"></i>
+                                <h6>+{{user.phone}}</h6>
+                            </div>
+                            {% endif %}
+                            <div class="d-flex">
+                                <i class="fa fa-map-marker pr-1"></i>
+                                <h6>{{user.location}}</h6>
+                            </div>
+                            <div class="d-flex">
+                                <i class="fa fa-users pr-1"></i>
+                                <h6>{{user.maritalStatus}}</h6>
+                            </div>
+                            <div class="d-flex">
+                                <i class="fa fa-mars pr-1"></i>
+                                <h6>{{user.gender}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card card-left">
+                        <div class="card-body">
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5>Social Media</h5>
+                            </div>
+                            <hr>
+
+                            {% for socialAccount in socialAccounts %}
+                            
+                            {% if socialAccount.facebook %}
+                            <div class="d-flex">
+                                <i class="fa fa-facebook-square pr-1"></i>
+                                <a href="https://facebook.com/{{socialAccount.facebook}}/" target="_blank" style="color: #000">
+                                    <h6>{{socialAccount.facebook}}</h6>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% if socialAccount.instagram %}
+                            <div class="d-flex">
+                                <i class="fa fa-instagram pr-1"></i>
+                                <a href="https://instagram.com/{{socialAccount.instagram}}/" target="_blank" style="color: #000">
+                                    <h6>{{socialAccount.instagram}}</h6>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% if socialAccount.linkedin %}
+                            <div class="d-flex">
+                                <i class="fa fa-linkedin pr-1"></i>
+                                <a href="https://linkedin.com/in/{{socialAccount.linkedin}}/" target="_blank" style="color: #000">
+                                    <h6>{{socialAccount.linkedin}}</h6>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% if socialAccount.twitter %}
+                            <div class="d-flex">
+                                <i class="fa fa-twitter pr-1"></i>
+                                <a href="https://twitter.com/{{socialAccount.twitter}}/" target="_blank" style="color: #000">
+                                    <h6>{{socialAccount.twitter}}</h6>
+                                </a>
+                            </div>
+                            {% endif %}
+                            
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <!-- Right side div -->
+                
+                <div class="col-lg-9 col-md-12">
+                    <div class="card">
+                        <div class="card-body border-0">
+                            <div class="active" id="profile">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>About Me</h4>
+                                </div>
+                                <hr>
+                                {% for about in aboutMe %}
+                                <div class="mb-4">
+                                    <h6>{{about.description}}</h6>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-body border-0">
+                            <div class="active" id="profile">
+                                <h4>EDUCATION</h4>
+                                <hr>
+                                {% for educationDetail in educationDetails %}
+                                <div class="mb-4 d-flex justify-content-between border p-2">
+                                    <div>
+                                        <h5>{{educationDetail.instituteName}}</h5>
+                                        <span>{{educationDetail.degree}}</span><br>
+                                        <span>{{educationDetail.department}}</span><br>
+                                        <span>{{educationDetail.joinYear}} - {{educationDetail.passYear}}</span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% if basicInformation %}
+                                {% for basicInfo in basicInformation %}
+                                <div class="mb-4 border p-2">
+                                    <h5>Thapar Polytechnic College</h5>
+                                    <span>{{basicInfo.course}}</span><br>
+                                    <span>{{basicInfo.branch}}</span><br>
+                                    <span>{{basicInfo.joiningYear}} - {{basicInfo.passingYear}}</span>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-body border-0">
+                            <div class="active" id="profile">
+                                <h4>Work Experience</h4>
+                                <hr>
+                                {% for workExperience in workExperiences %}
+                                <div class="mb-4 d-flex justify-content-between border p-2">
+                                    <div>
+                                        <h5>{{workExperience.workTitle}}</h5>
+                                        <span>{{workExperience.companyName}}</span><br>
+                                        <span>In {{workExperience.workIndustry}}</span><br>
+                                        <small class="text-muted">{{workExperience.achievements}}</small>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% if facultyInformation %}
+                                {% for facultyInfo in facultyInformation %}
+                                <div class="mb-4 border p-2">
+                                    <h5>Thapar Polytechnic College</h5>
+                                    <span>{{facultyInfo.jobTitle}}</span><br>
+                                    <span>{{facultyInfo.Department}} department</span><br>
+                                    <span>{{facultyInfo.joinYear}} - {{facultyInfo.leftYear}}</span>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
