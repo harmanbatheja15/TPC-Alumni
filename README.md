@@ -16,19 +16,21 @@ The website is built using modern web development technologies, including HTML, 
 To install this website, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/harmanbatheja15/TPC-Alumni`
-2. Create a virtual environment: `virtualenv env`
-3. Activate the virtual environment: `source env/bin/activate`
-4. Install the dependencies: `pip3 install django`
-5. `python3 manage.py makemigrations`
-6. `python3 manage.py migrate`
+2. cd `TPC-Alumni/alumniAssociation`
+3. Create a virtual environment: `virtualenv env`
+4. Activate the virtual environment: `source env/bin/activate`
+5. Install the dependencies: `pip3 install django`
+6. `python3 manage.py makemigrations`
+7. `python3 manage.py migrate`
 
 ## Running the website
 
 To run the website, follow these steps:
 
-1. Activate the virtual environment: `source env/bin/activate`
-2. Start the development server: `python3 manage.py runserver`
-3. Open your web browser and go to `http://localhost:8000/`
+1. `cd TPC-Alumni/alumniAssociation`
+2. Activate the virtual environment: `source env/bin/activate`
+3. Start the development server: `python3 manage.py runserver`
+4. Open your web browser and go to `http://localhost:8000/`
 
 ## Contact
 
